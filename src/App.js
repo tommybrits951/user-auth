@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, {useState} from 'react'
 import './App.css';
+import Register from './components/Register';
+import Login from './components/Login';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [user, setUser] = useState({
+    username: '',
+    role_id: '',
+    token: null
+  })
+  function loginUser(person) {
+    setUser(person)
+  }
+  function sig() {
+    setUser({
+      username: '',
+    role_id: '',
+    token: null
+    })
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {user.token ? <Register user={user} sig={sig}/> : <Login log={loginUser}/>}      
     </div>
   );
 }
